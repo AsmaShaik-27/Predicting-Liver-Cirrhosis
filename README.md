@@ -2,7 +2,7 @@
 
 ##  Goal
 
-To develop a proof-of-concept (POC) web application using **Flask**, **HTML**, and **CSS** to predict whether a person is suffering from liver disease, using machine learning algorithms trained on a medical dataset.
+To develop a web application using **Flask**, **HTML**, and **CSS** to predict whether a person is suffering from liver disease, using machine learning algorithms trained on a medical dataset.
 
 ---
 
