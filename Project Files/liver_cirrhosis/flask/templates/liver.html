@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Liver Disease Prediction</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 4 -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <style>
+    body {
+      background: linear-gradient(120deg, #f0f4f8, #e8f0ff);
+      font-family: 'Josefin Sans', sans-serif;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    .hero-section {
+      padding-top: 60px;
+      padding-bottom: 30px;
+      text-align: center;
+    }
+
+    .hero-section h1 {
+      font-size: 2.7rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .hero-section hr {
+      width: 60px;
+      height: 3px;
+      background: #6c63ff;
+      border: none;
+      margin: 20px auto;
+    }
+
+    .form-card {
+      background: #ffffff;
+      padding: 35px 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+    }
+
+    .form-card label {
+      font-weight: 600;
+    }
+
+    .form-text {
+      font-size: 0.85rem;
+      color: #6c757d;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      padding: 10px 15px;
+    }
+
+    .submit-btn {
+      background-color: #6c63ff;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 12px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: 0.3s ease;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background-color: #574fd6;
+      transform: scale(1.03);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container hero-section">
+    <h1>Know Your Chances of Liver Disease</h1>
+    <hr>
+    <p class="lead text-muted">Fill the form below to predict the risk using key liver biomarkers.</p>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <form action="{{ url_for('predict') }}" method="post" class="form-card">
+
+          {% for label, name, type, placeholder, hint in [
+            ['Total Bilirubin', 'Total_Bilirubin', 'number', 'e.g., 1.2', 'High levels may indicate liver damage.'],
+            ['Direct Bilirubin', 'Direct_Bilirubin', 'number', 'e.g., 0.3', 'Processed bilirubin; issues in bile flow.'],
+            ['Alkaline Phosphotase', 'Alkaline_Phosphotase', 'number', 'e.g., 250', 'Enzyme linked to bile ducts.'],
+            ['ALT (Alamine Aminotransferase)', 'Alamine_Aminotransferase', 'number', 'e.g., 40', 'Liver inflammation marker.'],
+            ['AST (Aspartate Aminotransferase)', 'Aspartate_Aminotransferase', 'number', 'e.g., 35', 'Elevated in liver/muscle damage.'],
+            ['Total Proteins', 'Total_Protiens', 'number', 'e.g., 7.0', 'Nutritional and liver status.'],
+            ['Albumin', 'Albumin', 'number', 'e.g., 3.5', 'Made by liver; low levels = concern.'],
+            ['Albumin/Globulin Ratio', 'Albumin_and_Globulin_Ratio', 'number', 'e.g., 1.2', 'Low ratio may indicate damage.'],
+            ['Gender (Male=0, Female=1)', 'gender', 'number', 'e.g., 0', 'Biological sex impacts markers.'],
+            ['Age', 'age', 'number', 'e.g., 35', 'Aging affects liver enzyme levels.']
+          ] %}
+          <div class="form-group">
+            <label for="{{ name }}">{{ label }}</label>
+            <input class="form-control" type="{{ type }}" id="{{ name }}" name="{{ name }}" required placeholder="{{ placeholder }}">
+            <small class="form-text text-muted">{{ hint }}</small>
+          </div>
+          {% endfor %}
+
+          <button type="submit" class="submit-btn mt-4">Predict</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Liver Health Project</p>
+  </footer>
+
+  <!-- Bootstrap JS (optional) -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

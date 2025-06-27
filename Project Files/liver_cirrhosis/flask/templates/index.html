@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Liver Cirrhosis Overview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    :root {
+      --primary: #6a5acd;
+      --secondary: #483d8b;
+      --bg: #f5f9ff;
+      --card-bg: rgba(255, 255, 255, 0.75);
+      --blur: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Josefin Sans', sans-serif;
+      background: linear-gradient(135deg, #eef2f7, #dbe9ff);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .hero-section {
+  position: relative;
+  height: 100vh;
+  background: radial-gradient(circle at 20% 40%, #6a5acd, #483d8b 80%);
+  color: white;
+  overflow: hidden;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.hero-content {
+  z-index: 2;
+  position: relative;
+  padding: 20px;
+  max-width: 800px;
+  animation: fadeInUp 1s ease-in-out both;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+.hero-content p {
+  font-size: 1.3rem;
+}
+
+.btn-hero {
+  background-color: #fff;
+  color: #6a5acd;
+  font-weight: 600;
+  border-radius: 30px;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  box-shadow: 0 8px 30px rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
+}
+
+.btn-hero:hover {
+  background-color: #ddd;
+  transform: scale(1.05);
+}
+
+/* Smooth scroll target */
+#info {
+  scroll-margin-top: 80px;
+}
+
+/* Reuse existing fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+  .hero-content p {
+    font-size: 1.1rem;
+  }
+}
+
+    /* INFO CARDS */
+    .info-section {
+      padding: 60px 20px;
+    }
+
+    .info-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease-in-out forwards;
+      opacity: 0;
+    }
+
+    .info-card h5 {
+      font-weight: bold;
+      color: var(--secondary);
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* BUTTON */
+    .btn-custom {
+      background-color: var(--primary);
+      color: white;
+      font-weight: bold;
+      border-radius: 30px;
+      padding: 12px 35px;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(106, 90, 205, 0.3);
+    }
+
+    .btn-custom:hover {
+      background-color: var(--secondary);
+      transform: scale(1.05);
+    }
+
+    /* RESPONSIVENESS */
+    @media (max-width: 768px) {
+      .intro-section h1 {
+        font-size: 2.2rem;
+      }
+      .info-card {
+        padding: 20px;
+      }
+    }
+    html {
+      scroll-behavior: easy;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO SECTION -->
+  <div class="hero-section d-flex align-items-center justify-content-center text-center">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="display-3">Liver Cirrhosis Awareness</h1>
+      <p class="lead mt-3">
+        Detecting liver damage early can save lives.<br>Explore key health biomarkers below.
+      </p>
+      <a href="#info" class="btn btn-hero mt-4">Learn More</a>
+    </div>
+  </div>
+
+
+  <!-- INFO CARDS -->
+  <div id="info" class="container info-section">
+    <div class="row">
+      {% for label, desc in [
+        ['Total Bilirubin', 'Measures total bilirubin in blood; elevated levels suggest liver dysfunction.'],
+        ['Direct Bilirubin', 'A form of bilirubin that is processed by the liver; high levels indicate bile flow obstruction.'],
+        ['Alkaline Phosphotase', 'An enzyme linked to bile ducts; elevated in bile duct or liver diseases.'],
+        ['Alamine Aminotransferase (ALT)', 'An enzyme found mostly in the liver; high values may suggest liver inflammation.'],
+        ['Aspartate Aminotransferase (AST)', 'An enzyme found in multiple organs; elevated in liver or muscle damage.'],
+        ['Total Proteins', 'Includes albumin and globulin; measures nutritional and liver status.'],
+        ['Albumin', 'A protein made by the liver; low levels are seen in liver or kidney disease.'],
+        ['Albumin and Globulin Ratio', 'The ratio of two blood proteins; low ratio can indicate liver damage.'],
+        ['Gender', 'Biological sex affects liver enzyme levels; Male = 0, Female = 1.'],
+        ['Age', 'Liver function may change with age; used as a baseline factor.']
+      ] %}
+      <div class="col-md-6 col-lg-6">
+        <div class="info-card">
+          <h5>{{ label }}</h5>
+          <p>{{ desc }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- CTA BUTTON -->
+    <div class="text-center mt-5">
+      <a href="{{ url_for('liver') }}" class="btn btn-custom"> Proceed to Prediction</a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script>
+    // Trigger fade-in animation on scroll
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.info-card');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+          }
+        });
+      }, { threshold: 0.2 });
+      cards.forEach(card => observer.observe(card));
+    });
+  </script>
+</body>
+</html>
